@@ -19,7 +19,7 @@ router.use(authenticateJWT);
  *     tags: [Ventas]
  *     security:
  *       - bearerAuth: []
- *     description: Recupera una lista de todas las ventas realizadas. Es necesario estar autenticado.
+ *     description: Recupera una lista de todas las ventas realizadas. Es necesario estar autenticado para acceder a esta ruta.
  *     responses:
  *       200:
  *         description: Ventas obtenidas correctamente.
@@ -81,7 +81,7 @@ router.get('/', listarVentas);
  *     tags: [Ventas]
  *     security:
  *       - bearerAuth: []
- *     description: Crea una nueva venta y sus detalles. La venta requiere información del usuario y los productos.
+ *     description: Crea una nueva venta y sus detalles. La venta requiere información del usuario y los productos. Es necesario estar autenticado para acceder a esta ruta.
  *     requestBody:
  *       required: true
  *       content:
@@ -162,6 +162,16 @@ router.get('/', listarVentas);
  *                           subtotal:
  *                             type: number
  *                             example: 150.00
+ *       400:
+ *         description: Producto sin stock.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: No hay stock disponible del producto Producto A
  *       404:
  *         description: Producto no encontrado o sin stock.
  *         content:
@@ -171,7 +181,7 @@ router.get('/', listarVentas);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Producto con id 1 no encontrado
+ *                   example: Producto no encontrado
  *       500:
  *         description: Error en el servidor al crear la venta.
  *         content:
@@ -194,7 +204,7 @@ router.post('/', crearVenta);
  *     tags: [Ventas]
  *     security:
  *       - bearerAuth: []
- *     description: Elimina una venta existente y restaura el stock de los productos asociados.
+ *     description: Elimina una venta existente y restaura el stock de los productos asociados. Es necesario estar autenticado para acceder a esta ruta.
  *     parameters:
  *       - in: path
  *         name: id

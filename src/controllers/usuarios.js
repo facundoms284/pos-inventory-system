@@ -1,6 +1,6 @@
 const Usuario = require('../models/Usuario');
 
-// Obtener todos los usuarios
+// Get all users
 const listarUsuarios = async (req, res) => {
   try {
     const allUsers = await Usuario.findAll();
@@ -14,18 +14,18 @@ const listarUsuarios = async (req, res) => {
   }
 };
 
-// Eliminar un usuario
+// Delete a user
 const eliminarUsuario = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Verificar si el usuario existe
+    // Check if the user exists
     const usuarioExist = await Usuario.findByPk(id);
     if (!usuarioExist) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
 
-    // Eliminar el usuario
+    // Delete the user
     const deletedUser = await Usuario.destroy({ where: { id } });
     res.status(200).json({
       message: 'Usuario eliminado correctamente',

@@ -6,7 +6,7 @@ const DetalleVenta = require('../models/DetalleVenta.js');
 // Define associations between models
 
 const defineAssociations = () => {
-  // Un Usuario puede tener muchas Ventas
+  // Un Usuario can have many Ventas
   Usuario.hasMany(Venta, {
     as: 'ventas',
     foreignKey: 'id_usuario',
@@ -16,7 +16,7 @@ const defineAssociations = () => {
     foreignKey: 'id_usuario',
   });
 
-  // Una Venta puede tener muchos Detalles De Venta
+  // A Venta can have many Detalles De Venta
   Venta.hasMany(DetalleVenta, {
     as: 'detalles',
     foreignKey: 'id_venta',
@@ -26,7 +26,7 @@ const defineAssociations = () => {
     foreignKey: 'id_venta',
   });
 
-  // Un Producto puede estar en muchos Detalles de venta
+  // A Producto can be in many Detalles de venta
   Producto.hasMany(DetalleVenta, {
     as: 'detalles',
     foreignKey: 'id_producto',

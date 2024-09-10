@@ -12,14 +12,14 @@ const register = async (req, res) => {
         .json({ error: 'Debe ingresar todos los campos requeridos' });
     }
 
-    // Se procede a hashar la contraseña ingresada por el usuario.
+    // The password entered by the user is hashed.
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Crear un nuevo usuario
+    // Create a new user
     const newUser = await Usuario.create({
       nombre,
       email,
-      password_hash: hashedPassword, // La contraseña hashada se almacena en la base de datos en la columna 'password_hash'.
+      password_hash: hashedPassword, // Hashed password is stored in the database
       role: 'admin',
     });
 

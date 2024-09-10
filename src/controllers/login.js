@@ -8,7 +8,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Verificar si el usuario existe a través del email
+    // Check if the user exists via email
     const user = await Usuario.findOne({ where: { email } });
 
     if (!user) {
@@ -17,7 +17,7 @@ const login = async (req, res) => {
         .json({ error: 'Usuario no registrado en el sistema' });
     }
 
-    // Verificar si la contraseña coincide con la del usuario || bcrypt compara la contraseña ingresada por el usuario con la que se encuentra almacenada en la base de datos.
+    // Check if password matches user's password || bcrypt compares the password entered by the user with the one stored in the database.
     const matchedPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!matchedPassword) {
@@ -26,11 +26,11 @@ const login = async (req, res) => {
         .json({ error: 'La contraseña ingresada es incorrecta' });
     }
 
-    // Si el usuario ingresa correctamente las credenciales | Generar token JWT de acceso
+    // If the user enters the credentials correctly | Generate JWT access token
     const token = jwt.sign(
       { id: user.id, role: user.role },
       process.env.JWT_SECRET,
-      // El token expira en 1 hora
+      // Token expires in 1 hour
       { expiresIn: '1h' }
     );
 

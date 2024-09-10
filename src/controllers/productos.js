@@ -1,6 +1,6 @@
 const Producto = require('../models/Producto');
 
-// Listar todos los productos existentes
+// List all existing products
 const listAllProducts = async (req, res) => {
   try {
     const allProducts = await Producto.findAll();
@@ -14,11 +14,11 @@ const listAllProducts = async (req, res) => {
   }
 };
 
-// Crear un nuevo producto
+// Create a new product
 const createProduct = async (req, res) => {
   const { nombre, descripcion, precio, cantidad_disponible } = req.body;
 
-  // Validar que el precio no sea negativo
+  // Validate that the price is not negative
   if (precio <= 0) {
     return res
       .status(400)
@@ -26,7 +26,7 @@ const createProduct = async (req, res) => {
   }
 
   try {
-    // Crear un nuevo producto
+    // Create a new product
     const newProduct = await Producto.create({
       nombre,
       descripcion,
@@ -43,19 +43,19 @@ const createProduct = async (req, res) => {
   }
 };
 
-// Actualizar un producto existente
+// Update an existing product
 const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, precio, cantidad_disponible } = req.body;
 
   try {
-    // Verificar si el producto existe
+    // Check if the product exists
     const productExist = await Producto.findByPk(id);
     if (!productExist) {
       return res.status(404).json({ error: 'Producto no encontrado' });
     }
 
-    // Actualizar el producto
+    // Update the product
     const updatedProduct = await Producto.update(
       { nombre, descripcion, precio, cantidad_disponible },
       { where: { id } }
@@ -63,7 +63,6 @@ const updateProduct = async (req, res) => {
 
     res.status(200).json({
       message: 'Producto actualizado correctamente',
-      data: updatedProduct,
     });
   } catch (error) {
     console.error('Error al actualizar producto:', error);
@@ -71,17 +70,17 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// Eliminar un producto existente
+// Delete an existing product
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    // Verificar si el producto existe
+    // Check if the product exists
     const productExist = await Producto.findByPk(id);
     if (!productExist) {
       return res.status(404).json({ error: 'Producto no encontrado' });
     }
 
-    // Eliminar el producto
+    // Delete the product
     const deletedProduct = await Producto.destroy({ where: { id } });
     res.status(200).json({
       message: 'Producto eliminado correctamente',

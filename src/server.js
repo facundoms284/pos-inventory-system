@@ -31,12 +31,10 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./src/routes/*.js'], // rutas a documentar
+  apis: ['./src/routes/*.js'], // Routes to document
 };
 
 const swaggerSpec = swaggerJSDoc(options);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Define associations between models
 const defineAssociationsDB = require('./db/associations.js');
@@ -54,17 +52,20 @@ app.use(express.json());
 
 // Routes
 
-// Rutas sin protección
+// Route for API documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Routes without protection
 app.use('/api/v1/register', registerRoutes);
 app.use('/api/v1/login', loginRoutes);
 
-// Rutas con protección (sólo usuarios autenticados)
+// Routes with protection (only authenticated users)
 app.use('/api/v1/productos', productosRoutes);
 app.use('/api/v1/ventas', ventasRoutes);
 app.use('/api/v1/usuarios', usuariosRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello world from el servidor express. Ok.');
+  res.send('Hello world from express. All good.');
 });
 
 app.listen(port, () => {

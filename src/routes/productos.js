@@ -19,11 +19,12 @@ router.use(authenticateJWT);
 
 /**
  * @swagger
- * /productos:
+ * /api/v1/productos:
  *   get:
  *     summary: Listar todos los productos
  *     security:
  *       - bearerAuth: []
+ *     description: Recupera una lista de todos los productos registrados en el sistema. Es necesario estar autenticado para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     responses:
@@ -64,11 +65,12 @@ router.get('/', listarProductosController);
 
 /**
  * @swagger
- * /productos:
+ * /api/v1/productos:
  *   post:
  *     summary: Crear un nuevo producto
  *     security:
  *       - bearerAuth: []
+ *     description: Crea un nuevo producto en el sistema. Es necesario estar autenticado para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     requestBody:
@@ -128,11 +130,12 @@ router.post('/', crearProductoController);
 
 /**
  * @swagger
- * /productos/{id}:
+ * /api/v1/productos/{id}:
  *   put:
  *     summary: Actualizar un producto existente
  *     security:
  *       - bearerAuth: []
+ *     description: Actualiza un producto existente en el sistema. Es necesario estar autenticado para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     parameters:
@@ -183,11 +186,12 @@ router.put('/:id', actualizarProductoController);
 
 /**
  * @swagger
- * /productos/{id}:
+ * /api/v1/productos/{id}:
  *   delete:
  *     summary: Eliminar un producto existente
  *     security:
  *       - bearerAuth: []
+ *     description: Elimina un producto existente en el sistema. Es necesario estar autenticado para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     parameters:
