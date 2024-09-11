@@ -2,25 +2,32 @@ const Venta = require('../models/Venta');
 const DetalleVenta = require('../models/DetalleVenta');
 const Producto = require('../models/Producto');
 const Usuario = require('../models/Usuario');
+const sequelize = require('../db/database');
 
 // Helper function to check product stock and create sale details
-const crearDetalleVenta = async (producto, cantidad, id_venta) => {
+const crearDetalleVenta = async (producto, cantidad, id_venta, t) => {
   if (!producto) throw new Error(`Producto no encontrado`);
-  if (producto.cantidad_disponible < cantidad)
+  if (
+    producto.cantidad_disponible < cantidad ||
+    producto.cantidad_disponible <= 0
+  )
     throw new Error(`No hay stock disponible del producto ${producto.nombre}`);
 
   const subtotal = producto.precio * cantidad;
 
-  await DetalleVenta.create({
-    id_venta,
-    id_producto: producto.id,
-    cantidad,
-    precio_unitario: producto.precio,
-    subtotal,
-  });
+  await DetalleVenta.create(
+    {
+      id_venta,
+      id_producto: producto.id,
+      cantidad,
+      precio_unitario: producto.precio,
+      subtotal,
+    },
+    { transaction: t }
+  );
 
   producto.cantidad_disponible -= cantidad;
-  await producto.save();
+  await producto.save({ transaction: t });
 
   return { producto, cantidad, precio_unitario: producto.precio, subtotal };
 };
@@ -45,12 +52,17 @@ const listarVentas = async (req, res) => {
 const crearVenta = async (req, res) => {
   const { id_usuario, productos } = req.body;
 
+  const t = await sequelize.transaction();
+
   try {
     // Create the sale
-    const venta = await Venta.create({
-      id_usuario,
-      total: 0, // Initially the total of the sale is 0
-    });
+    const venta = await Venta.create(
+      {
+        id_usuario,
+        total: 0, // Initially the total of the sale is 0
+      },
+      { transaction: t }
+    );
 
     // Create the sale details
     let total = 0;
@@ -61,7 +73,8 @@ const crearVenta = async (req, res) => {
         const detalle = await crearDetalleVenta(
           producto,
           item.cantidad,
-          venta.id
+          venta.id,
+          t
         );
         total += detalle.subtotal;
         return detalle;
@@ -69,7 +82,7 @@ const crearVenta = async (req, res) => {
     );
 
     venta.total = total;
-    await venta.save();
+    await venta.save({ transaction: t });
 
     // Check the sale along with its details
     const ventaConDetallesIncluidos = await Venta.findByPk(venta.id, {
@@ -91,6 +104,7 @@ const crearVenta = async (req, res) => {
           attributes: ['id', 'nombre', 'email'],
         },
       ],
+      transaction: t,
     });
 
     // Restructure data to avoid duplicate information.
@@ -111,11 +125,14 @@ const crearVenta = async (req, res) => {
       ),
     };
 
+    await t.commit();
+
     res.status(200).json({
       message: 'Venta creada correctamente',
       data: ventaFormateada,
     });
   } catch (error) {
+    await t.rollback();
     console.error('Error al crear venta:', error);
     if (error.message.includes('Producto no encontrado')) {
       return res.status(404).json({ error: error.message });
