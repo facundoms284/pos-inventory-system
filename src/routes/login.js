@@ -77,7 +77,6 @@ const router = express.Router();
  *                   example: Error al iniciar sesión
  */
 
-// Ruta para el inicio de sesión
 router.post('/', loginController);
 
 module.exports = router;

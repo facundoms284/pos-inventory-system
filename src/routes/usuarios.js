@@ -2,12 +2,11 @@ const express = require('express');
 
 const { listarUsuarios, eliminarUsuario } = require('../controllers/usuarios');
 
-// Middleware para autenticar los usuarios
 const authenticateJWT = require('../middlewares/auth');
 
 const router = express.Router();
 
-// Aplico el middleware para autenticar los usuarios
+// Auth middleware
 router.use(authenticateJWT);
 
 /**

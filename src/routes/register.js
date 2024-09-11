@@ -84,7 +84,6 @@ const router = express.Router();
  *                   example: Error al registrar usuario
  */
 
-// Ruta para el registro de usuario
 router.post('/', registerController);
 
 module.exports = router;

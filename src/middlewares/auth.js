@@ -1,3 +1,4 @@
+// Middleware to authenticate users
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {

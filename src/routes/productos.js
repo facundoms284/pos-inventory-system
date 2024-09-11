@@ -9,12 +9,11 @@ const actualizarProductoController =
 const eliminarProductoController =
   require('../controllers/productos').deleteProduct;
 
-// Middleware para autenticar los usuarios
 const authenticateJWT = require('../middlewares/auth');
 
 const router = express.Router();
 
-// Aplico el middleware para autenticar los usuarios
+// Auth middleware
 router.use(authenticateJWT);
 
 /**

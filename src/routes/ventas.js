@@ -1,14 +1,14 @@
 const express = require('express');
 
-// Middleware para autenticar los usuarios
-const authenticateJWT = require('../middlewares/auth');
 const { listarVentas } = require('../controllers/ventas');
 const { crearVenta } = require('../controllers/ventas');
 const { eliminarVenta } = require('../controllers/ventas');
 
+const authenticateJWT = require('../middlewares/auth');
+
 const router = express.Router();
 
-// Aplico el middleware para autenticar los usuarios
+// Auth middleware
 router.use(authenticateJWT);
 
 /**
