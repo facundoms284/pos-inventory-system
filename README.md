@@ -55,12 +55,12 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 
 ## Project Structure
 
-src/db/: Database configuration.
-src/middlewares/: Authentication middleware.
-src/models/: Database models with Sequelize.
-src/controllers/: Business logic.
-src/routes/: API routes (sales, products, users, registration, login).
-src/server.js/: Express server configuration.
+- src/db/: Database configuration.
+- src/middlewares/: Authentication middleware.
+- src/models/: Database models with Sequelize.
+- src/controllers/: Business logic.
+- src/routes/: API routes (sales, products, users, registration, login).
+- src/server.js/: Express server configuration.
 
 ## License
 
