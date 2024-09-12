@@ -3,11 +3,13 @@
 A point-of-sale (POS) inventory system for managing products, users, and sales.
 
 ## Features
+
 - Manage products, users, and sales.
 - Register new users (administrators).
 - Sales reporting and real-time inventory control.
 
 ## Technologies Used
+
 - **Backend**: Node.js with Express.
 - **Database**: PostgreSQL with Sequelize ORM.
 - **Authentication**:
@@ -15,9 +17,9 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 - bcrypt: For password encryption, ensuring user credentials are protected.
 
 ## Installation
+
 1. Clone the repository:
    git clone git@github.com:facundoms284/pos-inventory-system.git
-   
 2. Navigate to the project folder and install dependencies:
    npm install
 
@@ -26,7 +28,13 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 4. Start the server:
    npm run dev
 
+## Usage
+
+1. Once the server is running, navigate to http://localhost:3000 to ensure everything is working correctly. You should see a message saying "Hello world from express. All good. POS Inventory API".
+2. To acces the API documentation, go to http://localhost:3000/api-docs.
+
 ## Project Structure
+
 src/db/: Database configuration.
 src/middlewares/: Authentication middleware.
 src/models/: Database models with Sequelize.
@@ -35,4 +43,5 @@ src/routes/: API routes (sales, products, users, registration, login).
 src/server.js/: Express server configuration.
 
 ## License
+
 - This project is licensed under the MIT License.
