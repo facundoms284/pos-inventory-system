@@ -163,7 +163,7 @@ router.get('/', listarVentas);
  *                             type: number
  *                             example: 150.00
  *       400:
- *         description: Producto sin stock.
+ *         description: Producto sin stock o cantidad solicitada no disponible.
  *         content:
  *           application/json:
  *             schema:
@@ -173,7 +173,7 @@ router.get('/', listarVentas);
  *                   type: string
  *                   example: No hay stock disponible del producto Producto A
  *       404:
- *         description: Producto no encontrado o sin stock.
+ *         description: Producto no encontrado.
  *         content:
  *           application/json:
  *             schema:

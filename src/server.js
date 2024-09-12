@@ -65,7 +65,7 @@ app.use('/api/v1/ventas', ventasRoutes);
 app.use('/api/v1/usuarios', usuariosRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello world from express. All good.');
+  res.send('Hello world from express. All good. POS Inventory API');
 });
 
 app.listen(port, () => {

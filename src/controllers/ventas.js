@@ -64,15 +64,15 @@ const crearVenta = async (req, res) => {
       { transaction: t }
     );
 
-    // Create the sale details
     let total = 0;
 
+    // Create the sale details
     const detalles = await Promise.all(
       productos.map(async (item) => {
-        const producto = await Producto.findByPk(item.id_producto);
+        const producto = await Producto.findByPk(item.id_producto); // Find the product
         const detalle = await crearDetalleVenta(
-          producto,
-          item.cantidad,
+          producto, // Product found
+          item.cantidad, // Quantity of the product to buy
           venta.id,
           t
         );

@@ -174,8 +174,6 @@ router.post('/', crearProductoController);
  *                 message:
  *                   type: string
  *                   example: Producto actualizado correctamente
- *                 data:
- *                   type: object
  *       404:
  *         description: Producto no encontrado
  *       500:

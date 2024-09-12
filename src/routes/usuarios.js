@@ -110,6 +110,6 @@ router.get('/', listarUsuarios);
  *                   example: Error al eliminar usuario
  */
 
-router.delete('/:id', listarUsuarios);
+router.delete('/:id', eliminarUsuario);
 
 module.exports = router;
