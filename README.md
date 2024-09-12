@@ -52,6 +52,8 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 1. Once the server is running, navigate to http://localhost:3000 to ensure everything is working correctly. You should see a message saying "Hello world from express. All good. POS Inventory API".
 
 2. To acces the API documentation, go to http://localhost:3000/api-docs.
+   
+3. You can also interact with the API using Postman, based on the documentation available at the /api-docs route. Import the API routes into Postman, configure the necessary JWT tokens for authentication, and perform requests such as registering users, managing products, and recording sales. 
 
 ## Project Structure
 
