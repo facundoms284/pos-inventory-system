@@ -24,10 +24,12 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 ## Installation
 
 1. Clone the repository:
-   git clone git@github.com:facundoms284/pos-inventory-system.git
+
+- git clone git@github.com:facundoms284/pos-inventory-system.git
 
 2. Navigate to the project folder and install dependencies:
-   npm install
+
+- npm install
 
 3. Rename the file .env.example to .env and update the values to match your environment variables:
 
@@ -39,21 +41,24 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 - Make sure the database user and password in DBeaver match those provided in your .env file.
 
 5. Start the application using Docker Compose:
-   docker-compose up -d
+
+- docker-compose up -d
 
 6. To stop the application, run:
-   docker-compose down
+
+- docker-compose down
 
 7. Start the server:
-   npm run dev
+
+- npm run dev
 
 ## Usage
 
-1. Once the server is running, navigate to http://localhost:3000 to ensure everything is working correctly. You should see a message saying "Hello world from express. All good. POS Inventory API".
+1. Once the server is running, navigate to http://localhost:PORT to ensure everything is working correctly. You should see a message saying "Hello world from express. All good. POS Inventory API".
 
-2. To acces the API documentation, go to http://localhost:3000/api-docs.
-   
-3. You can also interact with the API using Postman, based on the documentation available at the /api-docs route. Import the API routes into Postman, configure the necessary JWT tokens for authentication, and perform requests such as registering users, managing products, and recording sales. 
+2. To acces the API documentation, go to http://localhost:PORT/api-docs.
+
+3. You can also interact with the API using Postman, based on the documentation available at the /api-docs route. Import the API routes into Postman, configure the necessary JWT tokens for authentication, and perform requests such as registering users, managing products, and recording sales.
 
 ## Project Structure
 
