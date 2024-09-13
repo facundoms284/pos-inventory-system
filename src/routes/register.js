@@ -10,7 +10,7 @@ const router = express.Router();
  *   post:
  *     summary: Registrar un nuevo usuario
  *     tags: [Autenticación]
- *     description: Permite registrar un nuevo usuario en el sistema. La contraseña proporcionada se almacenará en formato hash.
+ *     description: Permite registrar un nuevo usuario en el sistema. Al registrar un usuario por defecto su role será cliente a no ser que se le asigne role 'admin' en la request body. La contraseña proporcionada se almacenará en formato hash.
  *     requestBody:
  *       required: true
  *       content:
