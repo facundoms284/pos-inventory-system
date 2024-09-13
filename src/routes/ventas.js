@@ -4,12 +4,13 @@ const { listarVentas } = require('../controllers/ventas');
 const { crearVenta } = require('../controllers/ventas');
 const { eliminarVenta } = require('../controllers/ventas');
 
-const authenticateJWT = require('../middlewares/auth');
-
 const router = express.Router();
 
-// Auth middleware
-router.use(authenticateJWT);
+// Middlewares
+const authenticateJWT = require('../middlewares/auth');
+const authorizeRole = require('../middlewares/authorizeRole');
+
+// Modificar el get ventas, debe obtener las ventas según el id del usuario ingresado (serían las compras que realizó el usuario)
 
 /**
  * @swagger
@@ -71,7 +72,7 @@ router.use(authenticateJWT);
  *                   example: Error al obtener todas las ventas
  */
 
-router.get('/', listarVentas);
+router.get('/', authenticateJWT, listarVentas); // Agregar middleware para que solo pueda listar las ventas de él mismo. No puede listar las ventas de otros usuarios
 
 /**
  * @swagger
@@ -194,7 +195,7 @@ router.get('/', listarVentas);
  *                   example: Error al crear venta
  */
 
-router.post('/', crearVenta);
+router.post('/', authenticateJWT, crearVenta);
 
 /**
  * @swagger
@@ -245,6 +246,6 @@ router.post('/', crearVenta);
  *                   example: Error al eliminar venta
  */
 
-router.delete('/:id', eliminarVenta);
+router.delete('/:id', authenticateJWT, eliminarVenta);
 
 module.exports = router;

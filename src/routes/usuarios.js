@@ -2,12 +2,11 @@ const express = require('express');
 
 const { listarUsuarios, eliminarUsuario } = require('../controllers/usuarios');
 
-const authenticateJWT = require('../middlewares/auth');
-
 const router = express.Router();
 
-// Auth middleware
-router.use(authenticateJWT);
+// Middlewares
+const authenticateJWT = require('../middlewares/auth');
+const authorizeRole = require('../middlewares/authorizeRole');
 
 /**
  * @swagger
@@ -59,7 +58,7 @@ router.use(authenticateJWT);
  *                   example: Error al obtener todos los usuarios
  */
 
-router.get('/', listarUsuarios);
+router.get('/', authenticateJWT, authorizeRole('admin'), listarUsuarios);
 
 /**
  * @swagger
@@ -110,6 +109,6 @@ router.get('/', listarUsuarios);
  *                   example: Error al eliminar usuario
  */
 
-router.delete('/:id', eliminarUsuario);
+router.delete('/:id', authenticateJWT, authorizeRole('admin'), eliminarUsuario);
 
 module.exports = router;

@@ -9,12 +9,11 @@ const actualizarProductoController =
 const eliminarProductoController =
   require('../controllers/productos').deleteProduct;
 
+// Middlewares
 const authenticateJWT = require('../middlewares/auth');
+const authorizeRole = require('../middlewares/authorizeRole');
 
 const router = express.Router();
-
-// Auth middleware
-router.use(authenticateJWT);
 
 /**
  * @swagger
@@ -60,7 +59,7 @@ router.use(authenticateJWT);
  *       500:
  *         description: Error al obtener los productos
  */
-router.get('/', listarProductosController);
+router.get('/', authenticateJWT, listarProductosController);
 
 /**
  * @swagger
@@ -125,7 +124,12 @@ router.get('/', listarProductosController);
  *       500:
  *         description: Error al crear producto
  */
-router.post('/', crearProductoController);
+router.post(
+  '/',
+  authenticateJWT,
+  authorizeRole('admin'),
+  crearProductoController
+);
 
 /**
  * @swagger
@@ -179,7 +183,12 @@ router.post('/', crearProductoController);
  *       500:
  *         description: Error al actualizar producto
  */
-router.put('/:id', actualizarProductoController);
+router.put(
+  '/:id',
+  authenticateJWT,
+  authorizeRole('admin'),
+  actualizarProductoController
+);
 
 /**
  * @swagger
@@ -214,6 +223,11 @@ router.put('/:id', actualizarProductoController);
  *       500:
  *         description: Error al eliminar producto
  */
-router.delete('/:id', eliminarProductoController);
+router.delete(
+  '/:id',
+  authenticateJWT,
+  authorizeRole('admin'),
+  eliminarProductoController
+);
 
 module.exports = router;

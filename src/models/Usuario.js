@@ -25,7 +25,7 @@ const Usuario = sequelize.define(
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: 'admin',
+      defaultValue: 'cliente',
     },
     fecha_creacion: {
       type: DataTypes.DATE,

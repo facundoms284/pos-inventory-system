@@ -31,7 +31,6 @@ const register = async (req, res) => {
       nombre,
       email,
       password_hash: hashedPassword, // Hashed password is stored in the database
-      role: 'admin',
     });
 
     res
