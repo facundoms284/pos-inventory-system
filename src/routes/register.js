@@ -49,6 +49,10 @@ const router = express.Router();
  *                 data:
  *                   type: object
  *                   properties:
+ *                     fecha_creacion:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2024-09-13T18:52:52.421Z"
  *                     id:
  *                       type: integer
  *                       example: 1
@@ -61,7 +65,7 @@ const router = express.Router();
  *                       example: usuario@example.com
  *                     role:
  *                       type: string
- *                       example: admin
+ *                       example: cliente
  *       400:
  *         description: Faltan campos requeridos en la solicitud.
  *         content:

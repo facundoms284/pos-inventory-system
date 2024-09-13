@@ -56,6 +56,14 @@ const router = express.Router();
  *                       cantidad_disponible:
  *                         type: integer
  *                         example: 10
+ *                       fecha_creacion:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2024-09-13T18:52:52.421Z"
+ *                       fecha_actualizacion:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2024-09-13T18:52:52.421Z"
  *       500:
  *         description: Error al obtener los productos
  */
@@ -104,6 +112,14 @@ router.get('/', authenticateJWT, listarProductosController);
  *                 data:
  *                   type: object
  *                   properties:
+ *                     fecha_creacion:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2024-09-13T18:52:52.421Z"
+ *                     fecha_actualizacion:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2024-09-13T18:52:52.421Z"
  *                     id:
  *                       type: integer
  *                       example: 2

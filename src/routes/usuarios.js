@@ -43,9 +43,16 @@ const authorizeRole = require('../middlewares/authorizeRole');
  *                         type: string
  *                         format: email
  *                         example: usuario@example.com
+ *                       password_hash:
+ *                         type: string
+ *                         example: 2a$10$gUZyb3DSAcas23#$%!@#$%^&*
  *                       role:
  *                         type: string
  *                         example: admin
+ *                       fecha_creacion:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2024-09-13T18:52:52.421Z"
  *       500:
  *         description: Error en el servidor al obtener los usuarios.
  *         content:
