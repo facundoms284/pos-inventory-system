@@ -12,6 +12,17 @@ const register = async (req, res) => {
         .json({ error: 'Debe ingresar todos los campos requeridos' });
     }
 
+    // Check if the user already exists
+    const userExists = await Usuario.findOne({
+      where: { email },
+    });
+    if (userExists) {
+      return res.status(400).json({
+        error:
+          'El correo electrónico ingresado ya está en uso por otro usuario',
+      });
+    }
+
     // The password entered by the user is hashed.
     const hashedPassword = await bcrypt.hash(password, 10);
 
