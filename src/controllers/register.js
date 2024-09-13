@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
 
 const register = async (req, res) => {
-  const { nombre, email, password } = req.body;
+  const { nombre, email, password, role } = req.body;
 
   try {
     if (!nombre || !email || !password) {
@@ -31,6 +31,7 @@ const register = async (req, res) => {
       nombre,
       email,
       password_hash: hashedPassword, // Hashed password is stored in the database
+      role: role || 'cliente', // Default role is cliente
     });
 
     res
