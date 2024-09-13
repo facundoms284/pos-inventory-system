@@ -68,7 +68,7 @@ router.get('/', authenticateJWT, listarProductosController);
  *     summary: Crear un nuevo producto
  *     security:
  *       - bearerAuth: []
- *     description: Crea un nuevo producto en el sistema. Es necesario estar autenticado para acceder a esta ruta.
+ *     description: Crea un nuevo producto en el sistema. Es necesario estar autenticado con un rol de 'admin' para para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     requestBody:
@@ -138,7 +138,7 @@ router.post(
  *     summary: Actualizar un producto existente
  *     security:
  *       - bearerAuth: []
- *     description: Actualiza un producto existente en el sistema. Es necesario estar autenticado para acceder a esta ruta.
+ *     description: Actualiza un producto existente en el sistema. Es necesario estar autenticado con un rol de 'admin' para para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     parameters:
@@ -197,7 +197,7 @@ router.put(
  *     summary: Eliminar un producto existente
  *     security:
  *       - bearerAuth: []
- *     description: Elimina un producto existente en el sistema. Es necesario estar autenticado para acceder a esta ruta.
+ *     description: Elimina un producto existente en el sistema. Es necesario estar autenticado con un rol de 'admin' para para acceder a esta ruta.
  *     tags:
  *       - Productos
  *     parameters:

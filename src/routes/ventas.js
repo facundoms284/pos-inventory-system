@@ -18,7 +18,7 @@ const authorizeRole = require('../middlewares/authorizeRole');
  *     tags: [Ventas]
  *     security:
  *       - bearerAuth: []
- *     description: Recupera una lista de todas las ventas realizadas. Es necesario estar autenticado para acceder a esta ruta.
+ *     description: Recupera una lista de todas las ventas realizadas. Es necesario estar autenticado para acceder a esta ruta. Usuarios con rol 'admin' pueden listar todas las ventas existentes. Usuarios con rol 'cliente' solo pueden listar sus ventas existentes.
  *     responses:
  *       200:
  *         description: Ventas obtenidas correctamente.

@@ -16,7 +16,7 @@ const authorizeRole = require('../middlewares/authorizeRole');
  *     tags: [Usuarios]
  *     security:
  *       - bearerAuth: []
- *     description: Recupera una lista de todos los usuarios registrados en el sistema. Es necesario estar autenticado para acceder a esta ruta.
+ *     description: Recupera una lista de todos los usuarios registrados en el sistema. Es necesario estar autenticado con un rol de 'admin' para para acceder a esta ruta.
  *     responses:
  *       200:
  *         description: Usuarios obtenidos correctamente.
@@ -68,7 +68,7 @@ router.get('/', authenticateJWT, authorizeRole('admin'), listarUsuarios);
  *     tags: [Usuarios]
  *     security:
  *       - bearerAuth: []
- *     description: Elimina un usuario del sistema. Es necesario estar autenticado para acceder a esta ruta.
+ *     description: Elimina un usuario del sistema. Es necesario estar autenticado con un rol de 'admin' para para acceder a esta ruta.
  *     parameters:
  *       - in: path
  *         name: id
