@@ -32,17 +32,35 @@ const crearDetalleVenta = async (producto, cantidad, id_venta, t) => {
   return { producto, cantidad, precio_unitario: producto.precio, subtotal };
 };
 
-// List all existing sales
+// List all existing sales for a user
 const listarVentas = async (req, res) => {
   try {
-    const allVentas = await Venta.findAll();
+    const { id: id_usuario, role } = req.user; // Get the role and user ID from the request
 
-    res.status(allVentas.length ? 200 : 404).json({
-      message: allVentas.length
-        ? 'Ventas obtenidas correctamente'
-        : 'No se encontraron ventas',
-      data: allVentas,
-    });
+    // Check user role
+    if (role === 'admin') {
+      // Admin can list all sales
+      const allVentas = await Venta.findAll();
+
+      res.status(allVentas.length ? 200 : 404).json({
+        message: allVentas.length
+          ? 'Ventas obtenidas correctamente'
+          : 'No se encontraron ventas',
+        data: allVentas,
+      });
+    } else {
+      // Client can only list their own sales
+      const allVentasUser = await Venta.findAll({
+        where: { id_usuario },
+      });
+
+      res.status(allVentasUser.length ? 200 : 404).json({
+        message: allVentasUser.length
+          ? 'Ventas obtenidas correctamente'
+          : 'No se encontraron ventas',
+        data: allVentasUser,
+      });
+    }
   } catch (error) {
     console.error('Error al obtener todas las ventas:', error);
     res.status(500).json({ error: 'Error al obtener todas las ventas' });

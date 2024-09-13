@@ -10,8 +10,6 @@ const router = express.Router();
 const authenticateJWT = require('../middlewares/auth');
 const authorizeRole = require('../middlewares/authorizeRole');
 
-// Modificar el get ventas, debe obtener las ventas según el id del usuario ingresado (serían las compras que realizó el usuario)
-
 /**
  * @swagger
  * /api/v1/ventas:
@@ -72,7 +70,7 @@ const authorizeRole = require('../middlewares/authorizeRole');
  *                   example: Error al obtener todas las ventas
  */
 
-router.get('/', authenticateJWT, listarVentas); // Agregar middleware para que solo pueda listar las ventas de él mismo. No puede listar las ventas de otros usuarios
+router.get('/', authenticateJWT, listarVentas);
 
 /**
  * @swagger
