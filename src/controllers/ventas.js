@@ -35,7 +35,8 @@ const crearDetalleVenta = async (producto, cantidad, id_venta, t) => {
 // List all existing sales for a user
 const listarVentas = async (req, res) => {
   try {
-    const { id: id_usuario, role } = req.user; // Get the role and user ID from the request
+    const { id, role } = req.user; // Get the role and user ID from the request
+    console.log(id);
 
     // Check user role
     if (role === 'admin') {
@@ -48,10 +49,10 @@ const listarVentas = async (req, res) => {
           : 'No se encontraron ventas',
         data: allVentas,
       });
-    } else {
+    } else if (role === 'cliente') {
       // Client can only list their own sales
       const allVentasUser = await Venta.findAll({
-        where: { id_usuario },
+        where: { id_usuario: id },
       });
 
       res.status(allVentasUser.length ? 200 : 404).json({
@@ -166,12 +167,20 @@ const crearVenta = async (req, res) => {
 // Delete an existing sale
 const eliminarVenta = async (req, res) => {
   const { id } = req.params;
+  const { id: id_usuario, role } = req.user;
 
   try {
     // Check if the sale exists
     const ventaExist = await Venta.findByPk(id);
     if (!ventaExist) {
       return res.status(404).json({ error: 'Venta no encontrada' });
+    }
+
+    // Check if the sale belongs to the user
+    if (ventaExist.id_usuario !== id_usuario) {
+      return res
+        .status(403)
+        .json({ error: 'No tiene permiso para cancelar esta venta' });
     }
 
     // Get the sale details
