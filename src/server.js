@@ -6,6 +6,9 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 
+const sequelize = require('./db/database.js');
+const defineAssociationsDB = require('./db/associations.js');
+
 // Swagger Definition
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -38,8 +41,17 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 // Define associations between models
-const defineAssociationsDB = require('./db/associations.js');
 defineAssociationsDB();
+
+// Sync models to database
+sequelize
+  .sync()
+  .then(() => {
+    console.log('Modelos sincronizados');
+  })
+  .catch((error) => {
+    console.error('Error al sincronizar los modelos:', error);
+  });
 
 // Routes import
 const registerRoutes = require('./routes/register');
