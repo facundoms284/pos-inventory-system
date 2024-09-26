@@ -35,18 +35,18 @@ A point-of-sale (POS) inventory system for managing products, users, and sales.
 
 - Open the .env file and provide the necessary configuration values, including database connection details.
 
-4. Set up the PostgreSQL database:
-
-- Open DBeaver and create a new PostgreSQL database with the name specified in the .env file.
-- Make sure the database user and password in DBeaver match those provided in your .env file.
-
-5. Start the application using Docker Compose:
+4. Start the application using Docker Compose:
 
 - docker-compose up -d
 
-6. To stop the application, run:
+5. To stop the application, run:
 
 - docker-compose down
+
+6. Set up the PostgreSQL database:
+
+- Open DBeaver and create a new PostgreSQL database with the name specified in the .env file.
+- Make sure the database user and password in DBeaver match those provided in your .env file.
 
 7. Start the server:
 
